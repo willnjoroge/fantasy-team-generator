@@ -9,7 +9,7 @@ const Pitch: React.FC = () => {
   const handleGenerateTeam = async () => {
     try {
       const response = await api.fetchTeam();
-      setTeam(response.team);
+      setTeam(response);
     } catch (error) {
       console.error("Error generating team", error);
     }
@@ -17,7 +17,7 @@ const Pitch: React.FC = () => {
 
   return (
     <div className="pitch-container">
-      <div className="field">
+      <div className="pitch">
         <div className="goalkeeper position">
           {team?.startingXI
             .filter((player) => player.position === "Goalkeeper")

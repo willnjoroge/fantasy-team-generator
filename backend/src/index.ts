@@ -1,12 +1,19 @@
-import express, { Application } from "express";
-import teamRoutessssss from "./routes/teamRoutes";
+import express, { Express } from "express";
+import teamRoutes from "./routes/teamRoutes";
+import dotenv from "dotenv";
+import cors from "cors";
 
-const app: Application = express();
+dotenv.config();
 
-const port = process.env.PORT || 3000;
+const app: Express = express();
+
+app.use(cors());
+
+const port = process.env.PORT || 5000;
 
 app.use(express.json());
+app.use;
 
-app.use("/api/teams", teamRoutessssss);
+app.use("/api/teams", teamRoutes);
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
