@@ -5,7 +5,7 @@ import Pitch from "./components/Pitch";
 const App = () => {
   return (
     <div className="App">
-      <h1>Fantasy Team Generator</h1>
+      <h1>Dream FPL Team Generator</h1>
       <Pitch />
     </div>
   );

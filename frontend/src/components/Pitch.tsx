@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { Team } from "../../../shared/models/Player";
+import { Player, Team } from "../../../shared/models/Player";
 import api from "../services/api";
 import "./Pitch.css";
+import PlayerCard from "./PlayerCard";
+import PlayerPopup from "./PlayerPopup";
 
 const Pitch: React.FC = () => {
   const [team, setTeam] = useState<Team | null>(null);
+  const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null);
 
   const handleGenerateTeam = async () => {
     try {
@@ -22,36 +25,44 @@ const Pitch: React.FC = () => {
           {team?.startingXI
             .filter((player) => player.position === "Goalkeeper")
             .map((player) => (
-              <div key={player.id} className="player-card">
-                {player.name}
-              </div>
+              <PlayerCard
+                key={player.id}
+                player={player}
+                onClick={(player) => setSelectedPlayer(player)}
+              />
             ))}
         </div>
         <div className="defenders position">
           {team?.startingXI
             .filter((player) => player.position === "Defender")
             .map((player) => (
-              <div key={player.id} className="player-card">
-                {player.name}
-              </div>
+              <PlayerCard
+                key={player.id}
+                player={player}
+                onClick={(player) => setSelectedPlayer(player)}
+              />
             ))}
         </div>
         <div className="midfielders position">
           {team?.startingXI
             .filter((player) => player.position === "Midfielder")
             .map((player) => (
-              <div key={player.id} className="player-card">
-                {player.name}
-              </div>
+              <PlayerCard
+                key={player.id}
+                player={player}
+                onClick={(player) => setSelectedPlayer(player)}
+              />
             ))}
         </div>
         <div className="forwards position">
           {team?.startingXI
             .filter((player) => player.position === "Forward")
             .map((player) => (
-              <div key={player.id} className="player-card">
-                {player.name}
-              </div>
+              <PlayerCard
+                key={player.id}
+                player={player}
+                onClick={(player) => setSelectedPlayer(player)}
+              />
             ))}
         </div>
       </div>
@@ -59,12 +70,21 @@ const Pitch: React.FC = () => {
         <h3>Substitutes</h3>
         <div className="substitute-cards">
           {team?.substitutes.map((player) => (
-            <div key={player.id} className="substitute-card">
-              {player.name}
-            </div>
+            <PlayerCard
+              key={player.id}
+              player={player}
+              onClick={(player) => setSelectedPlayer(player)}
+            />
           ))}
         </div>
       </div>
+
+      {selectedPlayer && (
+        <PlayerPopup
+          player={selectedPlayer}
+          onClose={() => setSelectedPlayer(null)}
+        />
+      )}
 
       <button onClick={handleGenerateTeam}>Generate Team</button>
     </div>
