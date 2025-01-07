@@ -3,6 +3,6 @@ import { generateTeam } from "../controllers/teamController";
 
 const teamRoutes = Router();
 
-teamRoutes.get("/generate", generateTeam);
+teamRoutes.post("/generate", generateTeam);
 
 export default teamRoutes;

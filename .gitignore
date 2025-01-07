@@ -3,6 +3,9 @@
 # npm
 .npmrc
 
+# env
+.env
+
 # compiled
 dist
 
